@@ -12,7 +12,14 @@ const playlist = document.getElementsByClassName('style-scope ytd-playlist-video
 // iterate over each video
 playlist.forEach(videoCard => {
     // extract the time information of the video and split it by the ":" character
-    let timeInfo = videoCard.querySelector('#time-status').innerText.trim().split(":");
+    let timeInfo;
+    
+    if (videoCard.querySelector('#time-status')!=null && videoCard.querySelector('#time-status').innerText.includes(":")) {
+      // İki nokta üst üste varsa normal bölme
+      timeInfo = videoCard.querySelector('#time-status').innerText.trim().split(":");
+    } else {
+      return;
+    }
 
     if (timeInfo.length === 2) {
         // if the duration has 2 elements (minutes and seconds)
